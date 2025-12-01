@@ -4,10 +4,14 @@ import { AuthContext } from "../context/AuthContext";
 const Dashboard = () => {
   const auth = useContext(AuthContext);
 
+  if (auth?.isLoading) {
+    return <div>Loading user data...</div>;
+  }
+
   return (
     <div>
       <h2>Dashboard</h2>
-      {auth?.user ? <h3>Welcome, {auth.user.username}!</h3> : <p>Loading user data...</p>}
+      {auth?.user ? <h3>Welcome, {auth.user.username}!</h3> : <p>No user data found</p>}
     </div>
   );
 };

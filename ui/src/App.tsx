@@ -12,7 +12,7 @@ function App() {
     <BrowserRouter>
       <div className="app">
         <Navbar />
-        <main className="main-content">
+        <main className="main-content flex justify-center items-center min-h-screen">
           <Routes>
             <Route path="/" element={<Navigate to="/login" />} />
             <Route path="/login" element={<Login />} />
