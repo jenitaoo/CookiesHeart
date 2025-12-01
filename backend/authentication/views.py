@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.middleware.csrf import get_token
 from .serializers import UserSerializer, RegisterSerializer, LoginSerializer
 
 class RegisterView(generics.CreateAPIView):
@@ -43,3 +44,8 @@ class UserView(APIView):
         if request.user.is_authenticated:
             return Response(UserSerializer(request.user).data)
         return Response({'message': 'Not logged in'}, status=status.HTTP_401_UNAUTHORIZED)
+
+class CSRFTokenView(APIView):
+    def get(self, request):
+        csrf_token = get_token(request)
+        return Response({'csrfToken': csrf_token})
