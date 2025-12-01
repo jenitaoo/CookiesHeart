@@ -22,7 +22,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="logo">
-        <Link to="/">DockerizedAuthFlow</Link>
+        <Link to="/">MakerSuite</Link>
       </div>
       <div className="nav-links">
         {auth?.user ? (
