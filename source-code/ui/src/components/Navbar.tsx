@@ -31,7 +31,7 @@ const Navbar = () => {
           variant="h6"
           className="cursor-pointer py-1.5 text-[#646cff] hover:text-[#535bf2]"
         >
-          MakerSuite
+          Cookie's Heart
         </Typography>
         <div className="flex gap-6 items-center">
           {auth?.user ? (

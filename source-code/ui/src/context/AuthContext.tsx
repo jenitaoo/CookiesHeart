@@ -3,7 +3,6 @@ import { authService } from "../services/auth";
 
 interface User {
   username: string;
-  email?: string;
 }
 
 interface AuthContextType {

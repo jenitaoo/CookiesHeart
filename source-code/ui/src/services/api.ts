@@ -1,7 +1,7 @@
 // src/services/api.js
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8001';
 
 const apiClient = axios.create({
   baseURL: API_URL,
@@ -26,7 +26,7 @@ const getCSRFToken = async () => {
 };
 
 // Add CSRF token to all requests
-apiClient.interceptors.request.use(async (config) => {
+apiClient.interceptors.request.use(async (config: any) => {
   if (['post', 'put', 'patch', 'delete'].includes(config.method?.toLowerCase() || '')) {
     const csrfToken = await getCSRFToken();
     if (csrfToken) {

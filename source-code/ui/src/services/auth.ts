@@ -2,7 +2,6 @@ import apiClient from "./api";
 
 interface UserData {
   username: string;
-  email: string;
   password: string;
 }
 

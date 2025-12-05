@@ -7,7 +7,6 @@ import { authService } from "../services/auth";
 // Define interface for form values
 interface SignupValues {
   username: string;
-  email: string;
   password: string;
   password2: string;
 }
@@ -17,7 +16,6 @@ const SignupSchema = Yup.object().shape({
     .min(3, "Too Short!")
     .max(50, "Too Long!")
     .required("Required"),
-  email: Yup.string().email("Invalid email").required("Required"),
   password: Yup.string()
     .min(8, "Password must be at least 8 characters")
     .required("Required"),
@@ -55,7 +53,7 @@ const Signup = () => {
         )}
 
         <Formik<SignupValues>
-          initialValues={{ username: "", email: "", password: "", password2: "" }}
+          initialValues={{ username: "", password: "", password2: "" }}
           validationSchema={SignupSchema}
           onSubmit={handleSubmit}
         >
@@ -72,19 +70,6 @@ const Signup = () => {
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <ErrorMessage name="username" component="div" className="text-sm text-red-600 mt-1" />
-              </div>
-
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                  Email
-                </label>
-                <Field
-                  type="email"
-                  name="email"
-                  id="email"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                <ErrorMessage name="email" component="div" className="text-sm text-red-600 mt-1" />
               </div>
 
               <div>
