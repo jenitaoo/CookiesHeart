@@ -42,10 +42,14 @@ The backend provides these API endpoints:
 - POST /api/auth/login/: Authenticate a user
 - POST /api/auth/logout/: Log out the current user
 - GET /api/auth/user/: Get information about the current user
+
 ### Docker Compose
 All components in this tech stack are run in separate containers, use Docker Compose to use them. Here are common commands:
 - Start all services: `docker-compose up -d`
 - Stop all services: `docker-compose down -v`
+
+### Django
+Run Django migrations: `docker-compose exec backend python manage.py migrate`
 
 <a name="getting-started"></a>
 ## 4. Geting Started: Setup ♡₊ ⊹
