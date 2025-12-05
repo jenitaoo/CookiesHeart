@@ -2,52 +2,58 @@ version: '3.8'
 
 services:
   db:
+    container_name: db-cookies-heart
     image: postgres:13
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - cookies_postgres_data:/var/lib/postgresql/data/
     environment:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_USER=postgres
-      - POSTGRES_DB=postgres
+      - POSTGRES_DB=cookiesheartdb
     ports:
-      - "5432:5432"
+      - "5433:5432"
     networks:
-      - webapp_network  
+      - webapp_network
+
   backend:
+    container_name: backend-cookies-heart
     build: ./backend
     volumes:
       - ./backend:/app
     ports:
-      - "8000:8000"
+      - "8001:8000"
     depends_on:
       - db
     environment:
-      - DATABASE_URL=postgres://postgres:postgres@db:5432/postgres
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/cookiesheartdb
       - DEBUG=True
     networks:
-      - webapp_network  
+      - webapp_network
+
   ui:
+    container_name: ui-cookies-heart
     build: ./ui
     volumes:
       - ./ui:/app
       - /app/node_modules
     ports:
-      - "5173:5173"
+      - "5174:5173"
     depends_on:
       - backend
     command: npm run dev
     environment:
-      - VITE_API_URL=http://localhost:8000
+      - VITE_API_URL=http://localhost:8001
     networks:
       - webapp_network
+
   pgadmin:
     image: dpage/pgadmin4
-    container_name: pgadmin
+    container_name: pgadmin-cookies-heart
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: admin
     ports:
-      - "5050:80"
+      - "5051:80"
     depends_on:
       - db
     networks:
@@ -58,4 +64,4 @@ networks:
     driver: bridge
 
 volumes:
-  postgres_data:
+  cookies_postgres_data:
